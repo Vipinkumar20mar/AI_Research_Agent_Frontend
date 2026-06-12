@@ -2,18 +2,17 @@ import streamlit as st
 import requests
 import pyrebase
 
-# =========================================================
+
 # PAGE CONFIG
-# =========================================================
+
 st.set_page_config(
     page_title="AI Research Assistant",
     page_icon="🤖",
     layout="wide"
 )
 
-# =========================================================
+
 # CSS
-# =========================================================
 st.markdown("""
 <style>
 
@@ -37,15 +36,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# =========================================================
+
 # API URL
-# =========================================================
 API_URL = "https://ai-research-agent-backend-1.onrender.com/api/chat"
 HISTORY_URL = "https://ai-research-agent-backend-1.onrender.com/api/history"
 
-# =========================================================
 # FIREBASE CONFIG
-# =========================================================
 firebaseConfig = {
     "apiKey": "AIzaSyCJ1dJif8R7Or5xsMXLKImWNVGwOGalJtE",
     "authDomain": "shopify-ai-support-agent.firebaseapp.com",
@@ -60,9 +56,9 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 
-# =========================================================
+
 # SESSION STATE
-# =========================================================
+
 if "token" not in st.session_state:
     st.session_state.token = None
 
@@ -70,15 +66,15 @@ if "email" not in st.session_state:
     st.session_state.email = None
 
 
-# =========================================================
+
 # TITLE
-# =========================================================
+
 st.markdown('<div class="main-title">🤖 AI Research Assistant</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# =========================================================
+
 # LOGIN / SIGNUP
-# =========================================================
+
 if st.session_state.token is None:
 
     tab1, tab2 = st.tabs(["Login", "Signup"])
@@ -117,9 +113,9 @@ if st.session_state.token is None:
                 st.error("Signup Failed")
                 st.write(e)
 
-# =========================================================
+
 # CHAT APP
-# =========================================================
+
 else:
 
     headers = {
@@ -145,9 +141,9 @@ else:
           topics = []
         
 
-    # =====================================================
+ 
     # SIDEBAR
-    # =====================================================
+
     with st.sidebar:
 
         st.success(f"Logged in as {st.session_state.email}")
@@ -174,9 +170,9 @@ else:
         st.info("✔ FastAPI Backend")
         st.info("✔ Firebase Auth")
 
-    # =====================================================
+
     # MAIN CHAT
-    # =====================================================
+  
     st.subheader("💬 Chat with AI Research Assistant")
 
     # show DB history in chat window
